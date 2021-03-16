@@ -1,30 +1,42 @@
-import tinytuya
 import time
 
-device = tinytuya.BulbDevice('bf80b3b54b9856bf57brh4', '192.168.0.3', '1bb14822386d6d5a', 'device22')
-device.set_dpsUsed({"24": None})
-device.set_version(3.3)
-choose = str(input("[?] Insert a color name: "))
+from ac_interface import AssettoCorsaData
+from led_interface import LedInterface
 
-if choose == "red":
-    device.set_colour(255,0,0)
+ledInterface = LedInterface()
+ledInterface.__init__()
 
-if choose == "green":
-    device.set_colour(0,255,0)
-    
-if choose == "blue":
-    device.set_colour(0,0,255)
+assettoReader = AssettoCorsaData()
+assettoReader.start()
 
-# THIS MUST BE CALLED OTHERWISE IT WILL NOT WORK!!!
-device.status()
+
+
+def xred(rpm):
+    return int(((rpm - 5500) * 255) / 1500)
+
+def xgreen(rpm):
+    return int(255 - (((rpm - 5500) * 255) / 1500))
 
 while True:
-    device.set_colour(255,0,0)
-    device.status()
-    time.sleep(0.1)
-    device.set_colour(0,255,0)
-    device.status()
-    time.sleep(0.1)
-    device.set_colour(0,0,255)
-    device.status()
-    time.sleep(0.1)
+    data = assettoReader.getData()
+    if data['rpm']>6000:
+        ledInterface.setColour(xred(data['rpm']), xgreen(data['rpm']), 0)
+        print("(" + str(xred(data['rpm'])) + ", " + str(xgreen(data['rpm'])) + ")")
+    
+
+
+    """ data = assettoReader.getData()
+    if data['rpm'] < 2000:
+        start_time = time.time()
+        ledInterface.setColour(0, 255, 0)
+        print("[*] Green " + str((time.time() - start_time)))
+
+    if data['rpm'] > 3000 and data['rpm'] < 5000:
+        start_time = time.time()
+        ledInterface.setColour(255, 255, 0)
+        print("[*] Yellow " + str((time.time() - start_time)))
+
+    elif data['rpm'] > 3000:
+        start_time = time.time()
+        ledInterface.setColour(255, 0, 0)
+        print("[*] Red " + str((time.time() - start_time)))"""
