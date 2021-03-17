@@ -9,34 +9,46 @@ ledInterface.__init__()
 assettoReader = AssettoCorsaData()
 assettoReader.start()
 
+state = None
 
+#def xred(rpm):
+ #   return int(((rpm - 5500) * 255) / 1500)
+#def xgreen(rpm):
+ #   return int(255 - (((rpm - 5500) * 255) / 1500))
+#     ledInterface.setColour(xred(data['rpm']), xgreen(data['rpm']), 0)
+  #      print("(" + str(xred(data['rpm'])) + ", " + str(xgreen(data['rpm'])) + ")")
+    
+#THIS SENT CALL TOO QUICKLY TO THE LED CONTROLLER, MAKING IT CRASH
+#NOW I ONLY CALL THE .changeColor WHEN THE COLOR NEEDS TO CHANGE
 
-def xred(rpm):
-    return int(((rpm - 5500) * 255) / 1500)
-
-def xgreen(rpm):
-    return int(255 - (((rpm - 5500) * 255) / 1500))
 
 while True:
     data = assettoReader.getData()
-    if data['rpm']>6000:
-        ledInterface.setColour(xred(data['rpm']), xgreen(data['rpm']), 0)
-        print("(" + str(xred(data['rpm'])) + ", " + str(xgreen(data['rpm'])) + ")")
+    print(str(data['rpm']))
     
-
-
-    """ data = assettoReader.getData()
-    if data['rpm'] < 2000:
-        start_time = time.time()
+    if data['rpm']<6000 and state != 0:
         ledInterface.setColour(0, 255, 0)
-        print("[*] Green " + str((time.time() - start_time)))
+        state = 0
 
-    if data['rpm'] > 3000 and data['rpm'] < 5000:
-        start_time = time.time()
+    elif data['rpm']>=6000 and data['rpm']<6300 and state != 1:
+        ledInterface.setColour(140, 255, 0)
+        state = 1
+        
+    elif data['rpm']>=6300 and data['rpm']<6400 and state != 2:
+        ledInterface.setColour(200, 255, 0)
+        state = 2
+
+    elif data['rpm']>=6400 and data['rpm']<6600 and state != 3:
         ledInterface.setColour(255, 255, 0)
-        print("[*] Yellow " + str((time.time() - start_time)))
+        state = 3
 
-    elif data['rpm'] > 3000:
-        start_time = time.time()
+    elif data['rpm']>=6600 and data['rpm']<7000 and state != 4:
         ledInterface.setColour(255, 0, 0)
-        print("[*] Red " + str((time.time() - start_time)))"""
+        state = 4
+
+    elif data['rpm']>=7000 and state != 5:
+        ledInterface.setColour(128, 0, 128)
+        state = 5
+    
+    time.sleep(0.02)
+
