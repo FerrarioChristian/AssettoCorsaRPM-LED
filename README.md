@@ -14,7 +14,11 @@ The LED strip will turn purple when you hit the engine limiter.
 ## How To Fix Values For Specific Cars
 
 ## Credits
+Thanks to @dzosz  for the [assetto corsa telemetry](https://github.com/dzosz/OpenRacingHUD/blob/master/scripts/assetto_corsa_telemetry_reader.py) script.
+
 Thanks to @jasonacox for writing the [TinyTuya](https://github.com/jasonacox/tinytuya) module.
+
+Thanks to @sal65535 for helping me out with pytoon.
 
 ## Future Updates
 - [ ] Arduino as the LED controller, so that it does not crash when too many color change occur in short time.
