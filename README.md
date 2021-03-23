@@ -18,7 +18,7 @@ Thanks to @dzosz  for the [assetto corsa telemetry](https://github.com/dzosz/Ope
 
 Thanks to @jasonacox for writing the [TinyTuya](https://github.com/jasonacox/tinytuya) module.
 
-Thanks to @sal65535 for helping me out with pytoon.
+Thanks to @sal65535 for helping me out with python.
 
 ## Future Updates
 - [ ] Arduino as the LED controller, so that it does not crash when too many color change occur in short time.
