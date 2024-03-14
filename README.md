@@ -21,6 +21,6 @@ Thanks to @jasonacox for writing the [TinyTuya](https://github.com/jasonacox/tin
 Thanks to @sal65535 for helping me out with python.
 
 ## Future Updates
-- [ ] Arduino as the LED controller, so that it does not crash when too many color change occur in short time.
+- [ ] ESP32 as the LED controller, so that it does not crash when too many color change occur in short time.
 - [ ] List of cars to choose so that you dont need to manually adjust RPM values for different car engines.
-- [ ] _Game already opened?_ function, so that the script rembmers you to open the game before launching it.
+- [ ] _Game already opened?_ function, so that the script remembers you to open the game before launching it.
